@@ -47,7 +47,7 @@ const Experience = () => {
   const [particles, setParticles] = useState([]);
 
   // Smooth spring for line animation
-  const lineHeight = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const lineHeight = useSpring(scrollYProgress, { stiffness: 200, damping: 20 });
 
   // Parallax for timeline
   const timelineY = useTransform(scrollYProgress, [0, 1], [50, -50]);

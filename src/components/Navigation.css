@@ -35,7 +35,7 @@
 .index-item-marker {
   width: 8px;
   height: 8px;
-  border: 1px solid #0a0a0a;
+  border: 1px solid var(--text-primary);
   border-radius: 50%;
   position: relative;
   flex-shrink: 0;
@@ -48,7 +48,7 @@
   transform: translate(-50%, -50%);
   width: 4px;
   height: 4px;
-  background: #0a0a0a;
+  background: var(--text-primary);
   border-radius: 50%;
 }
 
@@ -62,14 +62,14 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.05em;
-  color: #0a0a0a;
+  color: var(--text-primary);
   font-variant-numeric: tabular-nums;
 }
 
 .index-item-label {
   font-size: 12px;
   font-weight: 500;
-  color: #0a0a0a;
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
@@ -91,19 +91,19 @@
   min-width: 28px;
   height: 28px;
   padding: 0 8px;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 11px;
   font-weight: 600;
-  color: #0a0a0a;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
 }
 
 .hint-text {
   font-size: 11px;
   font-weight: 500;
-  color: #999;
+  color: var(--text-tertiary);
   letter-spacing: 0.02em;
 }
 

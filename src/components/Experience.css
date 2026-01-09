@@ -58,9 +58,9 @@
 /* Animated vertical line */
 .timeline-line {
   position: absolute;
-  left: 8px;
-  top: 0;
-  width: 4px;
+  left: 40px;
+  top: 30px;
+  width: 2px;
   height: 100%;
   background: #0066cc;
   transform-origin: top;
@@ -75,7 +75,7 @@
 /* Markers */
 .timeline-marker {
   position: absolute;
-  left: -11px;
+  left: -8px;
   top: 0;
   width: 18px;
   height: 18px;

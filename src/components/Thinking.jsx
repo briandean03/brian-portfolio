@@ -29,6 +29,15 @@ const Thinking = () => {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true, amount: 0.15 }}
     >
+      {/* Animated gradient background */}
+      <motion.div
+        className="thinking-gradient"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+        viewport={{ once: true, amount: 0.2 }}
+      />
+
       <motion.div
         className="thinking-container"
         initial={{ y: 30 }}
