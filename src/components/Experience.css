@@ -1,0 +1,165 @@
+.experience {
+  min-height: 100vh;
+  padding: 12vh 6%;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+/* Animated gradient background */
+.experience-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-end) 0%,
+    transparent 50%,
+    var(--gradient-start) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating particles */
+.experience-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.experience-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.experience-title {
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 600;
+  margin-bottom: 6vh;
+  color: var(--text-primary);
+}
+
+/* Timeline wrapper */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+/* Animated vertical line */
+.timeline-line {
+  position: absolute;
+  left: 8px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #0066cc;
+  transform-origin: top;
+}
+
+/* Timeline items */
+.timeline-item {
+  position: relative;
+  margin-bottom: 6vh;
+}
+
+/* Markers */
+.timeline-marker {
+  position: absolute;
+  left: -11px;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  background: var(--bg-primary);
+  border: 3px solid #0066cc;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--border-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Content */
+.timeline-content {
+  padding-left: 20px;
+  transition: transform 0.3s ease;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5vh;
+}
+
+.timeline-role {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.timeline-date {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline-company {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 1vh;
+  color: var(--text-secondary);
+}
+
+.timeline-bullets {
+  list-style: disc;
+  margin-left: 20px;
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.timeline-bullets li {
+  margin-bottom: 0.8vh;
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 20px;
+  }
+
+  .timeline-marker {
+    left: -9px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .timeline-role {
+    font-size: 16px;
+  }
+
+  .timeline-date {
+    font-size: 12px;
+  }
+
+  .timeline-company {
+    font-size: 13px;
+  }
+
+  .timeline-bullets {
+    font-size: 13px;
+  }
+
+  .experience-particles .particle {
+    display: none;
+  }
+}

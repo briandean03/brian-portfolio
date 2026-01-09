@@ -1,0 +1,14 @@
+.app {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background: var(--bg-primary);
+  scroll-snap-type: y proximity;
+}
+
+/* Major sections snap to viewport */
+.app > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}

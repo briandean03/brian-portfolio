@@ -1,0 +1,122 @@
+/* Container and spacing */
+.thinking {
+  padding: 6rem 2rem;
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+.thinking-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Meta section */
+.thinking-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+
+.meta-index {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.meta-label {
+  font-weight: 400;
+}
+
+/* Divider */
+.thinking-divider {
+  height: 1px;
+  width: 100%;
+  background: var(--border-color);
+  transform-origin: left;
+}
+
+/* Horizontal scroll list */
+.thinking-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+}
+
+.thinking-list::-webkit-scrollbar {
+  height: 6px;
+}
+
+.thinking-list::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 3px;
+}
+
+.thinking-list::-webkit-scrollbar-thumb:hover {
+  background: #b0b0b0;
+}
+
+/* Each item */
+.thinking-item {
+  flex: 0 0 auto;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  scroll-snap-align: start;
+  transition: all 0.3s ease;
+}
+
+.thinking-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Tag */
+.thinking-tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+/* Title */
+.thinking-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+/* Arrow */
+.thinking-arrow {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  margin-top: 0.2rem;
+  transition: color 0.3s ease;
+}
+
+.thinking-item:hover .thinking-arrow {
+  color: #0066cc;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .thinking-item {
+    min-width: 220px;
+  }
+}
