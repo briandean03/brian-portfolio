@@ -2,18 +2,36 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import './Projects.css';
 
+const useMediaQuery = (query) => {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, [matches, query]);
+
+  return matches;
+};
+
 const Projects = () => {
   const sectionRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [particles, setParticles] = useState([]);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
 
-  // Parallax scroll
+  // Parallax scroll - reduced on mobile
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
 
-  const cardsY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [isMobile ? 30 : 100, isMobile ? -30 : -100]);
 
   // Generate particles
   useEffect(() => {
@@ -63,24 +81,27 @@ const Projects = () => {
     },
   ];
 
-  // Stagger variants
+  // Stagger variants - simplified for mobile
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
+        staggerChildren: isMobile ? 0.08 : 0.15,
+        delayChildren: isMobile ? 0.1 : 0.2,
       },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: isMobile || prefersReducedMotion ? 15 : 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: {
+        duration: isMobile ? 0.4 : 0.6,
+        ease: [0.22, 1, 0.36, 1]
+      },
     },
   };
 
@@ -164,14 +185,14 @@ const Projects = () => {
               key={project.id}
               className="project-card"
               variants={cardVariants}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              whileHover={{
+              onMouseEnter={() => !isMobile && setHoveredIndex(i)}
+              onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+              whileHover={!isMobile ? {
                 y: -8,
                 boxShadow: '0 12px 30px rgba(0,102,204,0.12)',
                 scale: 1.02
-              }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              } : {}}
+              transition={{ duration: isMobile ? 0.2 : 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="project-card-header">
                 <h3 className="project-title">{project.title}</h3>
@@ -183,22 +204,22 @@ const Projects = () => {
 
               <motion.div
                 className="project-card-details"
-                initial={{ opacity: 0, height: 0 }}
+                initial={{ opacity: 0, height: isMobile ? 'auto' : 0 }}
                 animate={{
-                  opacity: hoveredIndex === i ? 1 : 0,
-                  height: hoveredIndex === i ? 'auto' : 0,
+                  opacity: isMobile ? 1 : (hoveredIndex === i ? 1 : 0),
+                  height: isMobile ? 'auto' : (hoveredIndex === i ? 'auto' : 0),
                 }}
-                transition={{ duration: 0.35 }}
+                transition={{ duration: isMobile ? 0 : 0.35 }}
               >
                 <div className="project-tech">
                   {project.tech.map((tech, j) => (
                     <motion.span
                       key={j}
                       className="tech-badge"
-                      whileHover={{
+                      whileHover={!isMobile ? {
                         scale: 1.1,
                         backgroundColor: 'rgba(0, 102, 204, 0.15)'
-                      }}
+                      } : {}}
                     >
                       {tech}
                     </motion.span>

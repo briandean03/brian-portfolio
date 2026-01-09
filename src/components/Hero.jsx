@@ -1,27 +1,43 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import './Hero.css';
 
 const Hero = () => {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start']
   });
 
-  // Nike-style scroll kinetics - scale + blur + opacity
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    const checkReducedMotion = () => {
+      setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    };
+
+    checkMobile();
+    checkReducedMotion();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Simplified animations for mobile
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, isMobile ? 0.98 : 0.95]);
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '60%']);
   const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6], [1, 0.8, 0]);
-  const blur = useTransform(scrollYProgress, [0, 0.5], [0, 8]);
+  const blur = useTransform(scrollYProgress, [0, 0.5], [0, isMobile || prefersReducedMotion ? 0 : 8]);
 
   const title = "CRAFTING DIGITAL\nEXPERIENCES";
   const words = title.split('\n');
 
   const letterSpacing = useTransform(scrollYProgress, [0, 0.5], ['0em', '-0.03em']);
-  
+
   //Depth drift on scroll
-  const depthY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
+  const depthY = useTransform(scrollYProgress, [0, 1], ['0%', isMobile ? '20%' : '40%']);
 
 
   return (
@@ -44,11 +60,17 @@ const Hero = () => {
                 <motion.span
                   key={`${lineIndex}-${charIndex}`}
                   className="hero-char"
-                  initial={{ opacity: 0, y: 120, rotateX: -90, filter: 'blur(10px)' }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }}
+                  initial={isMobile || prefersReducedMotion
+                    ? { opacity: 0, y: 20 }
+                    : { opacity: 0, y: 120, rotateX: -90, filter: 'blur(10px)' }
+                  }
+                  animate={isMobile || prefersReducedMotion
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }
+                  }
                   transition={{
-                    duration: 1.2,
-                    delay: (lineIndex * 0.4) + (charIndex * 0.025),
+                    duration: isMobile ? 0.6 : 1.2,
+                    delay: (lineIndex * (isMobile ? 0.2 : 0.4)) + (charIndex * (isMobile ? 0.01 : 0.025)),
                     ease: [0.19, 1.0, 0.22, 1.0] // easeOutExpo
                   }}
                 >
@@ -67,11 +89,17 @@ const Hero = () => {
 
         <motion.div
           className="hero-subtitle"
-          initial={{ opacity: 0, y: 60, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={isMobile || prefersReducedMotion
+            ? { opacity: 0, y: 20 }
+            : { opacity: 0, y: 60, filter: 'blur(10px)' }
+          }
+          animate={isMobile || prefersReducedMotion
+            ? { opacity: 1, y: 0 }
+            : { opacity: 1, y: 0, filter: 'blur(0px)' }
+          }
           transition={{
-            delay: 1.8,
-            duration: 1.4,
+            delay: isMobile ? 0.8 : 1.8,
+            duration: isMobile ? 0.6 : 1.4,
             ease: [0.19, 1.0, 0.22, 1.0]
           }}
         >

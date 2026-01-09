@@ -4,6 +4,7 @@ import './Navigation.css';
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('about');
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll();
 
   const sections = [
@@ -14,11 +15,13 @@ const Navigation = () => {
     { id: 'contact', label: 'Connect', index: '05' },       // UPDATED INDEX
   ];
 
-  // Rail reacts subtly to scroll depth
+  // Rail reacts subtly to scroll depth - simplified for mobile
   const railOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
-  const railX = useTransform(scrollYProgress, [0, 0.05], [-12, 0]);
+  const railX = useTransform(scrollYProgress, [0, 0.05], [isMobile ? -6 : -12, 0]);
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
@@ -35,10 +38,15 @@ const Navigation = () => {
       });
     };
 
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleNavClick = (id) => {
@@ -63,8 +71,8 @@ const Navigation = () => {
               key={section.id}
               className={`index-item ${isActive ? 'active' : ''}`}
               onClick={() => handleNavClick(section.id)}
-              whileHover={{ x: 6 }}
-              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={!isMobile ? { x: 6 } : {}}
+              transition={{ duration: isMobile ? 0.15 : 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Active indicator */}
               <div className="index-item-marker">
@@ -74,7 +82,7 @@ const Navigation = () => {
                     scale: isActive ? 1 : 0,
                     opacity: isActive ? 1 : 0,
                   }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: isMobile ? 0.2 : 0.25, ease: [0.22, 1, 0.36, 1] }}
                 />
               </div>
 
@@ -86,9 +94,9 @@ const Navigation = () => {
                   className="index-item-label"
                   animate={{
                     opacity: isActive ? 1 : 0,
-                    x: isActive ? 0 : -8,
+                    x: isActive ? 0 : (isMobile ? -4 : -8),
                   }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: isMobile ? 0.2 : 0.25, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {section.label}
                 </motion.span>

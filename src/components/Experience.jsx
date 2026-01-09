@@ -2,6 +2,22 @@ import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import './Experience.css';
 
+const useMediaQuery = (query) => {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, [matches, query]);
+
+  return matches;
+};
+
 const experiences = [
   {
     role: "Junior IT & Data Professional",
@@ -40,17 +56,23 @@ const experiences = [
 
 const Experience = () => {
   const sectionRef = useRef(null);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
   const [particles, setParticles] = useState([]);
 
-  // Smooth spring for line animation
-  const lineHeight = useSpring(scrollYProgress, { stiffness: 200, damping: 20 });
+  // Smooth spring for line animation - disable on mobile
+  const lineHeight = useSpring(scrollYProgress, {
+    stiffness: isMobile ? 100 : 200,
+    damping: isMobile ? 30 : 20
+  });
 
-  // Parallax for timeline
-  const timelineY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  // Parallax for timeline - reduced on mobile
+  const timelineY = useTransform(scrollYProgress, [0, 1], [isMobile ? 20 : 50, isMobile ? -20 : -50]);
 
   // Generate particles
   useEffect(() => {
@@ -65,24 +87,27 @@ const Experience = () => {
     setParticles(particleArray);
   }, []);
 
-  // Stagger variants
+  // Stagger variants - simplified for mobile
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
+        staggerChildren: isMobile ? 0.1 : 0.2,
+        delayChildren: isMobile ? 0.05 : 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
+    hidden: { opacity: 0, x: isMobile || prefersReducedMotion ? -10 : -30 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: {
+        duration: isMobile ? 0.4 : 0.6,
+        ease: [0.22, 1, 0.36, 1]
+      },
     },
   };
 
@@ -176,13 +201,19 @@ const Experience = () => {
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ type: "spring", stiffness: 500, damping: 25, delay: i * 0.1 }}
-                whileHover={{ scale: 1.3, backgroundColor: '#0066cc' }}
+                transition={{
+                  type: isMobile || prefersReducedMotion ? "tween" : "spring",
+                  stiffness: 500,
+                  damping: 25,
+                  delay: i * (isMobile ? 0.05 : 0.1),
+                  duration: isMobile ? 0.3 : undefined
+                }}
+                whileHover={!isMobile ? { scale: 1.3, backgroundColor: '#0066cc' } : {}}
               />
 
               <motion.div
                 className="timeline-content"
-                whileHover={{ x: 8 }}
+                whileHover={!isMobile ? { x: 8 } : {}}
                 transition={{ duration: 0.3 }}
               >
                 <div className="timeline-header">
@@ -194,10 +225,13 @@ const Experience = () => {
                   {exp.bullets.map((bullet, idx) => (
                     <motion.li
                       key={idx}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={isMobile || prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -10 }}
+                      whileInView={isMobile || prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
                       viewport={{ once: true, amount: 0.2 }}
-                      transition={{ delay: 0.05 * idx, duration: 0.3 }}
+                      transition={{
+                        delay: isMobile ? 0 : 0.05 * idx,
+                        duration: isMobile ? 0.2 : 0.3
+                      }}
                     >
                       {bullet}
                     </motion.li>
