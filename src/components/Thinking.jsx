@@ -20,19 +20,9 @@ const useMediaQuery = (query) => {
 
 const writings = [
   {
-    title: 'Learning Data Systems in Public',
-    link: 'https://yourname.substack.com/p/example-1',
-    tag: 'DATA',
-  },
-  {
-    title: 'Notes on Automating Boring IT Work',
-    link: 'https://yourname.substack.com/p/example-2',
-    tag: 'SYSTEMS',
-  },
-  {
-    title: 'Early Career Mistakes in Tech',
-    link: 'https://yourname.substack.com/p/example-3',
-    tag: 'CAREER',
+    title: 'I Didn\'t Learn Automation—I Learned How Things Break',
+    link: 'https://briandean6.substack.com/p/i-didnt-learn-automation-i-learned',
+    tag: 'AUTOMATION',
   },
 ];
 

@@ -31,7 +31,7 @@ const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6], [1, 0.8, 0]);
   const blur = useTransform(scrollYProgress, [0, 0.5], [0, isMobile || prefersReducedMotion ? 0 : 8]);
 
-  const title = "CRAFTING DIGITAL\nEXPERIENCES";
+  const title = "DATA & SYSTEMS\nENGINEER";
   const words = title.split('\n');
 
   const letterSpacing = useTransform(scrollYProgress, [0, 0.5], ['0em', '-0.03em']);
@@ -103,8 +103,8 @@ const Hero = () => {
             ease: [0.19, 1.0, 0.22, 1.0]
           }}
         >
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <p>Sed do eiusmod tempor incididunt ut labore.</p>
+          <p>Building scalable data pipelines and intelligent integrations.</p>
+          <p>Turning complex data into actionable insights.</p>
         </motion.div>
 
         <motion.div

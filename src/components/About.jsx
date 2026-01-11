@@ -134,7 +134,7 @@ const About = () => {
                 transition: { duration: 0.3 },
               }}
             >
-              AI & Data enthusiast, building systems that turn complex data into actionable insight.
+              Junior IT & Data Professional with experience in data pipelines, system integrations, and analytics.
             </motion.p>
 
             <motion.div className="hero-accent-line" variants={itemVariants} />
@@ -176,18 +176,19 @@ const About = () => {
             {/* Primary Column */}
             <div className="about-primary">
               <motion.div className="about-role" variants={itemVariants}>
-                <h1>Building intelligent systems at the intersection of AI and data engineering.</h1>
+                <h1>Transforming data into actionable insights through automation and integration.</h1>
               </motion.div>
 
               <motion.div className="about-bio" variants={itemVariants}>
                 <p>
-                  I'm a software engineer specializing in machine learning and data infrastructure.
-                  I transform complex data challenges into scalable solutions, from building ML pipelines
-                  to deploying production-ready AI systems.
+                  I'm a Junior IT & Data Professional specializing in data pipelines, ETL workflows, and system integrations.
+                  With hands-on experience in Python, SQL, and cloud platforms, I build solutions that streamline data
+                  processing and enhance business intelligence.
                 </p>
                 <p style={{ marginTop: '1.5rem' }}>
-                  My work spans across natural language processing, computer vision, and data analytics,
-                  with a focus on creating systems that are both powerful and maintainable.
+                  My work spans database management, API integrations, and dashboard development, with a proven track
+                  record of reducing manual work through automation and improving reporting efficiency across consulting
+                  and public-sector environments.
                 </p>
               </motion.div>
 
@@ -220,31 +221,30 @@ const About = () => {
             >
               <div className="about-specs">
                 <motion.div className="spec-group" variants={itemVariants}>
-                  <div className="spec-label">Expertise</div>
+                  <div className="spec-label">Education</div>
                   <div className="spec-items">
-                    <div className="spec-item">Machine Learning & AI</div>
-                    <div className="spec-item">Data Engineering</div>
-                    <div className="spec-item">Full-Stack Development</div>
-                    <div className="spec-item">Cloud Infrastructure</div>
+                    <div className="spec-item">BSc Computing Science</div>
+                    <div className="spec-item">University of Stirling</div>
+                    <div className="spec-item">Sept 2022 – May 2025</div>
                   </div>
                 </motion.div>
 
                 <motion.div className="spec-group" variants={itemVariants}>
-                  <div className="spec-label">Tools & Technologies</div>
+                  <div className="spec-label">Core Skills</div>
                   <div className="spec-items">
-                    <div className="spec-item">Python, TensorFlow, PyTorch</div>
-                    <div className="spec-item">React, Node.js, TypeScript</div>
-                    <div className="spec-item">AWS, Docker, Kubernetes</div>
-                    <div className="spec-item">SQL, MongoDB, Redis</div>
+                    <div className="spec-item">Python, SQL, Pandas</div>
+                    <div className="spec-item">Power BI, Excel, Supabase</div>
+                    <div className="spec-item">React, REST APIs, PostgreSQL</div>
+                    <div className="spec-item">ETL Workflows, Data Automation</div>
                   </div>
                 </motion.div>
 
                 <motion.div className="spec-group" variants={itemVariants}>
-                  <div className="spec-label">Currently</div>
+                  <div className="spec-label">Certifications</div>
                   <div className="spec-items">
-                    <div className="spec-item">Exploring LLM applications</div>
-                    <div className="spec-item">Building RAG systems</div>
-                    <div className="spec-item">Open to opportunities</div>
+                    <div className="spec-item">Microsoft Azure AI Fundamentals</div>
+                    <div className="spec-item">Python for Everybody</div>
+                    <div className="spec-item">Award in General Insurance</div>
                   </div>
                 </motion.div>
               </div>

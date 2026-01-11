@@ -15,9 +15,9 @@ const Contact = () => {
   const contentY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   const contacts = [
-    { label: 'EMAIL', value: 'your.email@domain.com', link: 'mailto:your.email@domain.com', protocol: 'SMTP' },
-    { label: 'GITHUB', value: 'github.com/username', link: 'https://github.com/username', protocol: 'HTTPS' },
-    { label: 'LINKEDIN', value: 'linkedin.com/in/username', link: 'https://linkedin.com/in/username', protocol: 'HTTPS' },
+    { label: 'EMAIL', value: 'justbrian226@gmail.com', link: 'mailto:justbrian226@gmail.com', protocol: 'SMTP' },
+    { label: 'PHONE', value: '+971 564938735', link: 'tel:+971564938735', protocol: 'TEL' },
+    { label: 'LINKEDIN', value: 'linkedin.com/in/briananthonydean', link: 'https://www.linkedin.com/in/briananthonydean/', protocol: 'HTTPS' },
   ];
 
   const baselineDelay = 0;
@@ -218,7 +218,7 @@ const Contact = () => {
               <span className="status-text">AVAILABLE FOR OPPORTUNITIES</span>
             </div>
             <div className="footer-meta">
-              <span>© 2024</span>
+              <span>© 2025 Brian Anthony Dean</span>
               <span className="footer-divider">•</span>
               <span>Built with React + Framer Motion</span>
             </div>
