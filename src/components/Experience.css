@@ -133,14 +133,33 @@
 }
 
 @media (max-width: 768px) {
+  .experience {
+    padding: 8vh 6%;
+  }
+
   .timeline {
     padding-left: 20px;
   }
 
+  .timeline-line {
+    left: 20px;
+  }
+
   .timeline-marker {
-    left: -9px;
+    left: -7px;
     width: 14px;
     height: 14px;
+    border-width: 2px;
+  }
+
+  .timeline-content {
+    padding-left: 16px;
+  }
+
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
 
   .timeline-role {
@@ -157,9 +176,14 @@
 
   .timeline-bullets {
     font-size: 13px;
+    margin-left: 16px;
   }
 
   .experience-particles .particle {
     display: none;
+  }
+
+  .experience-gradient {
+    opacity: 0.5;
   }
 }

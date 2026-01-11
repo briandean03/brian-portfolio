@@ -67,6 +67,8 @@
   gap: 24px;
   padding-bottom: 2vh;
   scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
 }
 
 .projects-cards::-webkit-scrollbar {
@@ -147,14 +149,22 @@
 }
 
 @media (max-width: 768px) {
+  .projects {
+    padding: 6vh 0;
+  }
+
   .projects-cards {
     gap: 16px;
     padding-bottom: 2vh;
+    scroll-snap-type: x proximity;
+    overflow-y: hidden;
   }
 
   .project-card {
     flex: 0 0 260px;
     padding: 20px;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   .project-title {
@@ -163,5 +173,9 @@
 
   .projects-particles .particle {
     display: none;
+  }
+
+  .projects-gradient {
+    opacity: 0.5;
   }
 }

@@ -31,7 +31,7 @@ const Projects = () => {
     offset: ["start end", "end start"]
   });
 
-  const cardsY = useTransform(scrollYProgress, [0, 1], [isMobile ? 30 : 100, isMobile ? -30 : -100]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [isMobile ? 0 : 100, isMobile ? 0 : -100]);
 
   // Generate particles
   useEffect(() => {
@@ -178,7 +178,7 @@ const Projects = () => {
           whileInView="visible"
           variants={containerVariants}
           viewport={{ once: true, amount: 0.2 }}
-          style={{ y: cardsY }}
+          style={{ y: isMobile ? 0 : cardsY }}
         >
           {projects.map((project, i) => (
             <motion.div

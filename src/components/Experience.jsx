@@ -71,8 +71,8 @@ const Experience = () => {
     damping: isMobile ? 30 : 20
   });
 
-  // Parallax for timeline - reduced on mobile
-  const timelineY = useTransform(scrollYProgress, [0, 1], [isMobile ? 20 : 50, isMobile ? -20 : -50]);
+  // Parallax for timeline - disabled on mobile
+  const timelineY = useTransform(scrollYProgress, [0, 1], [isMobile ? 0 : 50, isMobile ? 0 : -50]);
 
   // Generate particles
   useEffect(() => {
@@ -182,7 +182,7 @@ const Experience = () => {
           whileInView="visible"
           variants={containerVariants}
           viewport={{ once: true, amount: 0.1 }}
-          style={{ y: timelineY }}
+          style={{ y: isMobile ? 0 : timelineY }}
         >
           {/* Animated vertical line */}
           <motion.div
