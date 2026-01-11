@@ -57,6 +57,14 @@ const Projects = () => {
     },
     {
       id: 2,
+      title: 'Traffic Prediction & Visualization System',
+      category: 'Machine Learning',
+      year: '2024',
+      tech: ['Flask', 'XGBoost', 'JavaScript'],
+      impact: 'R² = 0.9990 accuracy',
+    },
+    {
+      id: 3,
       title: 'API Integration Platform',
       category: 'System Integration',
       year: '2025',
@@ -64,20 +72,12 @@ const Projects = () => {
       impact: 'Seamless data flows',
     },
     {
-      id: 3,
+      id: 4,
       title: 'Automated Data Pipeline',
       category: 'Data Engineering',
       year: '2025',
       tech: ['Python', 'SQL', 'ETL'],
       impact: '40% faster reporting',
-    },
-    {
-      id: 4,
-      title: 'Energy KPI Dashboard',
-      category: 'Data Visualization',
-      year: '2025',
-      tech: ['Python Dash', 'Excel', 'Power BI'],
-      impact: 'Real-time insights',
     },
   ];
 
