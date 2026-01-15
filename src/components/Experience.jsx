@@ -228,7 +228,7 @@ const Experience = () => {
                   <motion.div
                     className="timeline-header-clickable"
                     onClick={() => toggleExpand(i)}
-                    whileTap={{ scale: 0.98, backgroundColor: 'rgba(0, 102, 204, 0.08)' }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <div className="timeline-header">
                       <h3 className="timeline-role">{exp.role}</h3>

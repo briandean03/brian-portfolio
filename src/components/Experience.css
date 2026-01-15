@@ -127,10 +127,15 @@
   margin: -12px -16px;
   border-radius: 8px;
   transition: background-color 0.3s ease;
+  background-color: transparent;
 }
 
 .timeline-header-clickable:hover {
-  background-color: var(--bg-secondary, rgba(0, 102, 204, 0.05));
+  background-color: var(--bg-secondary);
+}
+
+.timeline-header-clickable:active {
+  background-color: var(--border-color);
 }
 
 .timeline-header-row {
@@ -206,10 +211,6 @@
 
   .timeline-content {
     padding-left: 16px;
-  }
-
-  .timeline-header-clickable:active {
-    background-color: rgba(0, 102, 204, 0.1);
   }
 
   .expand-indicator {
