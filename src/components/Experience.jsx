@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import './Experience.css';
 
@@ -58,6 +58,11 @@ const Experience = () => {
   const sectionRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const toggleExpand = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -190,56 +195,89 @@ const Experience = () => {
             style={{ scaleY: lineHeight }}
           />
 
-          {experiences.map((exp, i) => (
-            <motion.div
-              className="timeline-item"
-              key={i}
-              variants={itemVariants}
-            >
+          {experiences.map((exp, i) => {
+            const isExpanded = expandedIndex === i;
+            return (
               <motion.div
-                className="timeline-marker"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  type: isMobile || prefersReducedMotion ? "tween" : "spring",
-                  stiffness: 500,
-                  damping: 25,
-                  delay: i * (isMobile ? 0.05 : 0.1),
-                  duration: isMobile ? 0.3 : undefined
-                }}
-                whileHover={!isMobile ? { scale: 1.3, backgroundColor: '#0066cc' } : {}}
-              />
-
-              <motion.div
-                className="timeline-content"
-                whileHover={!isMobile ? { x: 8 } : {}}
-                transition={{ duration: 0.3 }}
+                className={`timeline-item ${isExpanded ? 'expanded' : ''}`}
+                key={i}
+                variants={itemVariants}
               >
-                <div className="timeline-header">
-                  <h3 className="timeline-role">{exp.role}</h3>
-                  <span className="timeline-date">{exp.date}</span>
-                </div>
-                <span className="timeline-company">{exp.company}</span>
-                <ul className="timeline-bullets">
-                  {exp.bullets.map((bullet, idx) => (
-                    <motion.li
-                      key={idx}
-                      initial={isMobile || prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -10 }}
-                      whileInView={isMobile || prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{
-                        delay: isMobile ? 0 : 0.05 * idx,
-                        duration: isMobile ? 0.2 : 0.3
-                      }}
-                    >
-                      {bullet}
-                    </motion.li>
-                  ))}
-                </ul>
+                <motion.div
+                  className="timeline-marker"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{
+                    type: isMobile || prefersReducedMotion ? "tween" : "spring",
+                    stiffness: 500,
+                    damping: 25,
+                    delay: i * (isMobile ? 0.05 : 0.1),
+                    duration: isMobile ? 0.3 : undefined
+                  }}
+                  whileHover={!isMobile ? { scale: 1.3, backgroundColor: '#0066cc' } : {}}
+                  animate={isExpanded ? { backgroundColor: '#0066cc', scale: 1.2 } : {}}
+                />
+
+                <motion.div
+                  className="timeline-content"
+                  whileHover={!isMobile ? { x: 8 } : {}}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.div
+                    className="timeline-header-clickable"
+                    onClick={() => toggleExpand(i)}
+                    whileTap={{ scale: 0.98, backgroundColor: 'rgba(0, 102, 204, 0.08)' }}
+                  >
+                    <div className="timeline-header">
+                      <h3 className="timeline-role">{exp.role}</h3>
+                      <span className="timeline-date">{exp.date}</span>
+                    </div>
+                    <div className="timeline-header-row">
+                      <span className="timeline-company">{exp.company}</span>
+                      <motion.span
+                        className="expand-indicator"
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {isExpanded ? '−' : '+'}
+                      </motion.span>
+                    </div>
+                    <span className="timeline-hint">
+                      {isExpanded ? 'Tap to collapse' : `${exp.bullets.length} highlights · Tap to expand`}
+                    </span>
+                  </motion.div>
+
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.ul
+                        className="timeline-bullets"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        {exp.bullets.map((bullet, idx) => (
+                          <motion.li
+                            key={idx}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -10 }}
+                            transition={{
+                              delay: 0.05 * idx,
+                              duration: 0.3
+                            }}
+                          >
+                            {bullet}
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            );
+          })}
         </motion.div>
 
         {/* Scroll indicator */}

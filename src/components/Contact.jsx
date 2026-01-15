@@ -211,11 +211,11 @@ const Contact = () => {
           <div className="contact-footer-content">
             <div className="footer-status">
               <motion.span
-                className="status-dot"
-                animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                className="status-dot employed"
+                animate={{ opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <span className="status-text">AVAILABLE FOR OPPORTUNITIES</span>
+              <span className="status-text">CURRENTLY AT 2P2C DUBAI</span>
             </div>
             <div className="footer-meta">
               <span>© 2025 Brian Anthony Dean</span>

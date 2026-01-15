@@ -2,10 +2,25 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import './About.css';
 
+const skills = [
+  { name: 'Python', category: 'Languages' },
+  { name: 'SQL', category: 'Languages' },
+  { name: 'Pandas', category: 'Libraries' },
+  { name: 'Power BI', category: 'Tools' },
+  { name: 'Excel', category: 'Tools' },
+  { name: 'Supabase', category: 'Platforms' },
+  { name: 'React', category: 'Frameworks' },
+  { name: 'REST APIs', category: 'Technologies' },
+  { name: 'PostgreSQL', category: 'Databases' },
+  { name: 'ETL Workflows', category: 'Expertise' },
+  { name: 'Data Automation', category: 'Expertise' },
+];
+
 const About = () => {
   // Add the missing ref
   const sectionRef = useRef(null);
   const [particles, setParticles] = useState([]);
+  const [hoveredSkill, setHoveredSkill] = useState(null);
 
   // Parallax scroll
   const { scrollYProgress } = useScroll({
@@ -180,16 +195,56 @@ const About = () => {
               </motion.div>
 
               <motion.div className="about-bio" variants={itemVariants}>
-                <p>
-                  I'm a Junior IT & Data Professional specializing in data pipelines, ETL workflows, and system integrations.
-                  With hands-on experience in Python, SQL, and cloud platforms, I build solutions that streamline data
-                  processing and enhance business intelligence.
-                </p>
-                <p style={{ marginTop: '1.5rem' }}>
-                  My work spans database management, API integrations, and dashboard development, with a proven track
-                  record of reducing manual work through automation and improving reporting efficiency across consulting
-                  and public-sector environments.
-                </p>
+                <ul className="bio-highlights">
+                  <motion.li
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    <span className="highlight">Data pipelines</span>, <span className="highlight">ETL workflows</span>, and <span className="highlight">system integrations</span> specialist
+                  </motion.li>
+                  <motion.li
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.15 }}
+                  >
+                    Hands-on with <span className="highlight">Python</span>, <span className="highlight">SQL</span>, and <span className="highlight">cloud platforms</span>
+                  </motion.li>
+                  <motion.li
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    Building solutions that <span className="highlight">streamline data processing</span> and <span className="highlight">enhance business intelligence</span>
+                  </motion.li>
+                  <motion.li
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.25 }}
+                  >
+                    Experience in <span className="highlight">database management</span>, <span className="highlight">API integrations</span>, and <span className="highlight">dashboard development</span>
+                  </motion.li>
+                  <motion.li
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    Proven track record of <span className="highlight">reducing manual work</span> through automation
+                  </motion.li>
+                  <motion.li
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.35 }}
+                  >
+                    Background in <span className="highlight">consulting</span> and <span className="highlight">public-sector</span> environments
+                  </motion.li>
+                </ul>
               </motion.div>
 
               {/* Vertical divider */}
@@ -231,11 +286,37 @@ const About = () => {
 
                 <motion.div className="spec-group" variants={itemVariants}>
                   <div className="spec-label">Core Skills</div>
-                  <div className="spec-items">
-                    <div className="spec-item">Python, SQL, Pandas</div>
-                    <div className="spec-item">Power BI, Excel, Supabase</div>
-                    <div className="spec-item">React, REST APIs, PostgreSQL</div>
-                    <div className="spec-item">ETL Workflows, Data Automation</div>
+                  <div className="skills-tags">
+                    {skills.map((skill, idx) => (
+                      <motion.div
+                        key={skill.name}
+                        className="skill-tag"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.03 * idx, duration: 0.3 }}
+                        whileHover={{
+                          scale: 1.08,
+                          y: -2,
+                          boxShadow: '0 4px 12px rgba(0, 102, 204, 0.25)'
+                        }}
+                        whileTap={{ scale: 0.95 }}
+                        onHoverStart={() => setHoveredSkill(skill)}
+                        onHoverEnd={() => setHoveredSkill(null)}
+                      >
+                        {skill.name}
+                        {hoveredSkill?.name === skill.name && (
+                          <motion.span
+                            className="skill-category"
+                            initial={{ opacity: 0, y: 5 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                          >
+                            {skill.category}
+                          </motion.span>
+                        )}
+                      </motion.div>
+                    ))}
                   </div>
                 </motion.div>
 

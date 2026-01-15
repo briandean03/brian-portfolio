@@ -120,12 +120,64 @@
   color: var(--text-secondary);
 }
 
+/* Clickable header area */
+.timeline-header-clickable {
+  cursor: pointer;
+  padding: 12px 16px;
+  margin: -12px -16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.timeline-header-clickable:hover {
+  background-color: var(--bg-secondary, rgba(0, 102, 204, 0.05));
+}
+
+.timeline-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expand-indicator {
+  font-size: 20px;
+  font-weight: 300;
+  color: #0066cc;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 102, 204, 0.1);
+  flex-shrink: 0;
+}
+
+.timeline-hint {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+  display: block;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.timeline-header-clickable:hover .timeline-hint {
+  opacity: 1;
+}
+
+.timeline-item.expanded .timeline-marker {
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.2);
+}
+
 .timeline-bullets {
   list-style: disc;
   margin-left: 20px;
+  margin-top: 16px;
   font-size: 14px;
   color: var(--text-primary);
   line-height: 1.5;
+  overflow: hidden;
 }
 
 .timeline-bullets li {
@@ -154,6 +206,15 @@
 
   .timeline-content {
     padding-left: 16px;
+  }
+
+  .timeline-header-clickable:active {
+    background-color: rgba(0, 102, 204, 0.1);
+  }
+
+  .expand-indicator {
+    width: 28px;
+    height: 28px;
   }
 
   .timeline-header {
