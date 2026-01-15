@@ -21,14 +21,15 @@ const useMediaQuery = (query) => {
 const experiences = [
   {
     role: "Junior IT & Data Professional",
-    company: "2p2c Project Management Consultants Dubai",
+    company: "2p2c Project Management Consultants, Dubai",
     date: "Oct 2025 – Present",
     bullets: [
-      "Designed and deployed intelligent automation workflows using n8n, integrating LLM APIs to streamline document processing and data extraction",
       "Managed relational databases, data pipelines, and ETL workflows supporting internal business applications and reporting systems",
-      "Built and maintained API integrations between internal platforms and third-party services including Supabase, Power BI, and AI/ML endpoints",
+      "Built and maintained API integrations between internal platforms and third-party services including Supabase, Power BI, and external REST APIs",
+      "Designed and maintained workflow automations using n8n to streamline internal processes",
       "Supported and enhanced internal web platforms and tools built with React and Supabase, including authentication, data flows, and role-based access",
-      "Automated recurring data processing and reporting tasks using Python and SQL, reducing manual work by 60%",
+      "Diagnosed and resolved backend, SaaS, and web application issues across database, API, and hosting layers to maintain system reliability",
+      "Automated recurring data processing and reporting tasks using Python and SQL, reducing manual work and improving consistency",
       "Worked closely with consultants and stakeholders on data validation, documentation, and integration troubleshooting for live project systems",
     ],
   },
