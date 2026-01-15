@@ -5,15 +5,16 @@ import './About.css';
 const skills = [
   { name: 'Python', category: 'Languages' },
   { name: 'SQL', category: 'Languages' },
-  { name: 'Pandas', category: 'Libraries' },
-  { name: 'Power BI', category: 'Tools' },
-  { name: 'Excel', category: 'Tools' },
+  { name: 'n8n', category: 'AI Automation' },
+  { name: 'LLMs / AI APIs', category: 'AI/ML' },
+  { name: 'Scikit-learn', category: 'ML Libraries' },
+  { name: 'Pandas', category: 'Data Science' },
+  { name: 'Power BI', category: 'Analytics' },
   { name: 'Supabase', category: 'Platforms' },
   { name: 'React', category: 'Frameworks' },
   { name: 'REST APIs', category: 'Technologies' },
   { name: 'PostgreSQL', category: 'Databases' },
-  { name: 'ETL Workflows', category: 'Expertise' },
-  { name: 'Data Automation', category: 'Expertise' },
+  { name: 'ETL Pipelines', category: 'Data Engineering' },
 ];
 
 const About = () => {
@@ -149,7 +150,7 @@ const About = () => {
                 transition: { duration: 0.3 },
               }}
             >
-              Junior IT & Data Professional with experience in data pipelines, system integrations, and analytics.
+              Junior IT & Data Professional building intelligent automation, data pipelines, and ML-powered solutions.
             </motion.p>
 
             <motion.div className="hero-accent-line" variants={itemVariants} />
@@ -191,7 +192,7 @@ const About = () => {
             {/* Primary Column */}
             <div className="about-primary">
               <motion.div className="about-role" variants={itemVariants}>
-                <h1>Transforming data into actionable insights through automation and integration.</h1>
+                <h1>Transforming data into actionable insights through AI, automation, and integration.</h1>
               </motion.div>
 
               <motion.div className="about-bio" variants={itemVariants}>
@@ -202,7 +203,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
                   >
-                    <span className="highlight">Data pipelines</span>, <span className="highlight">ETL workflows</span>, and <span className="highlight">system integrations</span> specialist
+                    <span className="highlight">AI-powered automation</span> with <span className="highlight">n8n</span>, <span className="highlight">LLMs</span>, and intelligent workflows
                   </motion.li>
                   <motion.li
                     initial={{ opacity: 0, x: -10 }}
@@ -210,7 +211,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.15 }}
                   >
-                    Hands-on with <span className="highlight">Python</span>, <span className="highlight">SQL</span>, and <span className="highlight">cloud platforms</span>
+                    <span className="highlight">Data pipelines</span>, <span className="highlight">ETL workflows</span>, and <span className="highlight">system integrations</span>
                   </motion.li>
                   <motion.li
                     initial={{ opacity: 0, x: -10 }}
@@ -218,7 +219,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
                   >
-                    Building solutions that <span className="highlight">streamline data processing</span> and <span className="highlight">enhance business intelligence</span>
+                    Hands-on with <span className="highlight">Python</span>, <span className="highlight">SQL</span>, <span className="highlight">ML libraries</span>, and cloud platforms
                   </motion.li>
                   <motion.li
                     initial={{ opacity: 0, x: -10 }}
@@ -226,7 +227,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.25 }}
                   >
-                    Experience in <span className="highlight">database management</span>, <span className="highlight">API integrations</span>, and <span className="highlight">dashboard development</span>
+                    Building <span className="highlight">machine learning models</span> and <span className="highlight">predictive analytics</span> solutions
                   </motion.li>
                   <motion.li
                     initial={{ opacity: 0, x: -10 }}
