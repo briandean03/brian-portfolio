@@ -24,6 +24,11 @@ const writings = [
     link: 'https://briandean6.substack.com/p/i-didnt-learn-automation-i-learned',
     tag: 'AUTOMATION',
   },
+  {
+    title: 'There is always something you are supposed to be learning',
+    link: 'https://briandean6.substack.com/p/there-is-always-something-you-are',
+    tag: 'LIFE',
+  },
 ];
 
 const Thinking = () => {
