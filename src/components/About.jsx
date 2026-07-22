@@ -1,20 +1,48 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import './About.css';
 
+const certifications = [
+  {
+    name: 'Microsoft Azure AI Fundamentals',
+    file: '/certificates/azure-ai-900.png',
+    type: 'image',
+  },
+  {
+    name: 'Python for Everybody',
+    file: '/certificates/python-for-everybody.pdf',
+    type: 'pdf',
+  },
+  {
+    name: 'Award in General Insurance',
+    file: '/certificates/insurance.png',
+    type: 'image',
+  },
+];
+
 const skills = [
-  { name: 'Python', category: 'Languages' },
-  { name: 'SQL', category: 'Languages' },
-  { name: 'n8n', category: 'AI Automation' },
-  { name: 'LLMs / AI APIs', category: 'AI/ML' },
-  { name: 'Scikit-learn', category: 'ML Libraries' },
-  { name: 'Pandas', category: 'Data Science' },
-  { name: 'Power BI', category: 'Analytics' },
-  { name: 'Supabase', category: 'Platforms' },
-  { name: 'React', category: 'Frameworks' },
-  { name: 'REST APIs', category: 'Technologies' },
-  { name: 'PostgreSQL', category: 'Databases' },
-  { name: 'ETL Pipelines', category: 'Data Engineering' },
+  { name: 'Python', category: 'Programming & Scripting' },
+  { name: 'SQL', category: 'Programming & Scripting' },
+  { name: 'Java', category: 'Programming & Scripting' },
+  { name: 'JavaScript & TypeScript', category: 'Programming & Scripting' },
+  { name: 'n8n', category: 'Programming & Scripting' },
+  { name: 'Pandas', category: 'Programming & Scripting' },
+  { name: 'NumPy', category: 'Programming & Scripting' },
+  { name: 'Dash', category: 'Programming & Scripting' },
+  { name: 'React', category: 'Web & Integration' },
+  { name: 'REST APIs', category: 'Web & Integration' },
+  { name: 'HTML/CSS', category: 'Web & Integration' },
+  { name: 'WordPress', category: 'Web & Integration' },
+  { name: 'Primavera P6', category: 'Web & Integration' },
+  { name: 'Microsoft Azure', category: 'Cloud & Platforms' },
+  { name: 'Vercel', category: 'Cloud & Platforms' },
+  { name: 'Render', category: 'Cloud & Platforms' },
+  { name: 'Supabase', category: 'Cloud & Platforms' },
+  { name: 'XGBoost', category: 'Machine Learning' },
+  { name: 'Gradient Boosting', category: 'Machine Learning' },
+  { name: 'SVR', category: 'Machine Learning' },
+  { name: 'Regression Models', category: 'Machine Learning' },
+  { name: 'Reinforcement Learning', category: 'Machine Learning' },
 ];
 
 const About = () => {
@@ -22,6 +50,7 @@ const About = () => {
   const sectionRef = useRef(null);
   const [particles, setParticles] = useState([]);
   const [hoveredSkill, setHoveredSkill] = useState(null);
+  const [selectedCert, setSelectedCert] = useState(null);
 
   // Parallax scroll
   const { scrollYProgress } = useScroll({
@@ -150,7 +179,7 @@ const About = () => {
                 transition: { duration: 0.3 },
               }}
             >
-              Junior IT & Data Professional building intelligent automation, data pipelines, and ML-powered solutions.
+              Junior IT & Data Professional with experience designing data platforms, ETL pipelines, automation workflows, and analytics solutions across consulting and public-sector environments.
             </motion.p>
 
             <motion.div className="hero-accent-line" variants={itemVariants} />
@@ -192,7 +221,7 @@ const About = () => {
             {/* Primary Column */}
             <div className="about-primary">
               <motion.div className="about-role" variants={itemVariants}>
-                <h1>Transforming data into actionable insights through AI, automation, and integration.</h1>
+                <h1>Transforming complex operational data into automated reporting systems and actionable insights through data engineering, analytics, and software solutions.</h1>
               </motion.div>
 
               <motion.div className="about-bio" variants={itemVariants}>
@@ -203,7 +232,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 }}
                   >
-                    <span className="highlight">AI-powered automation</span> with <span className="highlight">n8n</span>, <span className="highlight">LLMs</span>, and intelligent workflows
+                    Designing <span className="highlight">enterprise data platforms</span> and <span className="highlight">ETL pipelines</span> for construction project controls
                   </motion.li>
                   <motion.li
                     initial={{ opacity: 0, x: -10 }}
@@ -211,7 +240,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.15 }}
                   >
-                    <span className="highlight">Data pipelines</span>, <span className="highlight">ETL workflows</span>, and <span className="highlight">system integrations</span>
+                    Building <span className="highlight">Java</span> and <span className="highlight">React/TypeScript</span> integrations connecting Primavera P6 with cloud databases
                   </motion.li>
                   <motion.li
                     initial={{ opacity: 0, x: -10 }}
@@ -219,7 +248,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
                   >
-                    Hands-on with <span className="highlight">Python</span>, <span className="highlight">SQL</span>, <span className="highlight">ML libraries</span>, and cloud platforms
+                    <span className="highlight">Automation workflows</span> with <span className="highlight">n8n</span>, database triggers, and Microsoft services
                   </motion.li>
                   <motion.li
                     initial={{ opacity: 0, x: -10 }}
@@ -227,7 +256,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.25 }}
                   >
-                    Building <span className="highlight">machine learning models</span> and <span className="highlight">predictive analytics</span> solutions
+                    <span className="highlight">Machine learning</span> and <span className="highlight">predictive analytics</span> with Python, XGBoost, and Power BI
                   </motion.li>
                   <motion.li
                     initial={{ opacity: 0, x: -10 }}
@@ -235,7 +264,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
                   >
-                    Proven track record of <span className="highlight">reducing manual work</span> through automation
+                    Replacing <span className="highlight">manual Excel-based workflows</span> with scalable automated digital platforms
                   </motion.li>
                   <motion.li
                     initial={{ opacity: 0, x: -10 }}
@@ -243,7 +272,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.35 }}
                   >
-                    Background in <span className="highlight">consulting</span> and <span className="highlight">public-sector</span> environments
+                    Background across <span className="highlight">consulting</span> and <span className="highlight">public-sector</span> environments in the UAE
                   </motion.li>
                 </ul>
               </motion.div>
@@ -324,9 +353,16 @@ const About = () => {
                 <motion.div className="spec-group" variants={itemVariants}>
                   <div className="spec-label">Certifications</div>
                   <div className="spec-items">
-                    <div className="spec-item">Microsoft Azure AI Fundamentals</div>
-                    <div className="spec-item">Python for Everybody</div>
-                    <div className="spec-item">Award in General Insurance</div>
+                    {certifications.map((cert) => (
+                      <button
+                        key={cert.name}
+                        className="spec-item cert-item"
+                        onClick={() => setSelectedCert(cert)}
+                      >
+                        {cert.name}
+                        <span className="cert-view-hint">View ↗</span>
+                      </button>
+                    ))}
                   </div>
                 </motion.div>
               </div>
@@ -343,6 +379,44 @@ const About = () => {
           />
         </div>
       </motion.div>
+      {/* Certificate Modal */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            className="cert-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setSelectedCert(null)}
+          >
+            <motion.div
+              className="cert-modal"
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="cert-modal-header">
+                <span className="cert-modal-title">{selectedCert.name}</span>
+                <button className="cert-modal-close" onClick={() => setSelectedCert(null)}>✕</button>
+              </div>
+              <div className="cert-modal-body">
+                {selectedCert.type === 'image' ? (
+                  <img src={selectedCert.file} alt={selectedCert.name} className="cert-modal-img" />
+                ) : (
+                  <iframe
+                    src={selectedCert.file}
+                    title={selectedCert.name}
+                    className="cert-modal-pdf"
+                  />
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
